@@ -14,9 +14,9 @@ exit : Quit from application"
 
 
 def show_files(subfolder_list, files_list):
-    print("------------------------------------------------------------------------------")
-    print("| Nome arquivo | Tamanho | Data de criação | Última alteração | proprietário |")
-    print("------------------------------------------------------------------------------")
+    print("------------------------------------------------------------------------------------------")
+    print("| Nome arquivo | Tamanho | Data de criação | Última alteração | Aplicação | Proprietário |")
+    print("------------------------------------------------------------------------------------------")
 
     for subfolder_name in sorted(subfolder_list):
         show_line(subfolder_name)
@@ -39,7 +39,7 @@ def show_line(file_name):
         print("| {0} ".format(value), end = "")
 
     
-    print("|\n------------------------------------------------------------------------------")
+    print("!\n------------------------------------------------------------------------------------------")
 
         
 

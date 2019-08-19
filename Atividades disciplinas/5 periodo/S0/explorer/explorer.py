@@ -4,6 +4,19 @@ import platform
 from datetime import datetime
 from stat import *
 
+import shlex
+import winreg
+
+def get_default_windows_app(suffix):
+    try:
+        class_root = winreg.QueryValue(winreg.HKEY_CLASSES_ROOT, suffix)
+        with winreg.OpenKey(winreg.HKEY_CLASSES_ROOT, r'{}\shell\open\command'.format(class_root)) as key:
+            command = winreg.QueryValueEx(key, '')[0]
+            return shlex.split(command)[0]
+    except Exception as e:
+        return "Nenhum"
+
+
 is_dir = lambda path: os.path.splitext(path)[-1] == ""
 
 def get_file_info(file_path):
@@ -40,6 +53,8 @@ def get_file_info(file_path):
         "Tamanho" : file_size_bytes,
         "Data de criação" : datetime.fromtimestamp(file_creation_time).strftime("%d/%m/%Y"),
         "Última alteração" : datetime.fromtimestamp(file_modification_time).strftime("%d/%m/%Y"),
+        "Aplicação" : os.path.basename(get_default_windows_app(file_ext)) if file_ext != "" else "Explorer",
+        "Proprietário" : "Nenhum"
     }
 
 
