@@ -11,6 +11,16 @@ class Population():
             _population_fitness.append(sample.fitness)
         
         return _population_fitness
+    
+    @property
+    def mutate_rates(self):
+        fitness = np.array(self.fitness)
+        rates = (fitness - min(fitness))/ (max(fitness) - min(fitness))
+
+        for sample,mutate_rate in zip(self.samples,rates):
+            sample._mutate_rate = mutate_rate
+
+        return rates
 
     def fitness_statistics(self):
         """ Return mean and std of population fitness """
@@ -26,13 +36,19 @@ class Population():
         return len(self.samples)
     
     def __getitem__(self, key):
-        if isinstance(key, int) or isinstance(key,slice):
+        if isinstance(key, int):
             return self.samples[key]
+        elif isinstance(key,slice):
+            return Population(self.samples[key])
         elif isinstance(key, Slice):
             raise Exception("error")
     
     def append(self, sample):
-        self.samples.append(sample)
+        if isinstance(sample, Population):
+            for samp in sample:
+                self.samples.append(samp)
+        else:
+            self.samples.append(sample)
     
     def sort(self):
         self.samples = sorted(self.samples)

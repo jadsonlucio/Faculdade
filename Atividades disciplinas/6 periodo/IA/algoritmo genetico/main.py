@@ -12,7 +12,10 @@ MAP_Y_SIZE = 500
 
 def change_display_city_wrapper(display_city):
     def wrapper(cont, history, population):
+        display_city.generation = cont
         display_city.best_path = population[0].path
+        display_city.score = int(history["best_sample_score"][-1])
+        #sleep(0.5)
     
     return wrapper
 
