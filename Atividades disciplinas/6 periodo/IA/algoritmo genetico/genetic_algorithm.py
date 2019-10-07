@@ -15,7 +15,7 @@ class Genetic:
         self.population = population
 
 
-    def evolve(self, generation_callback = None, max_generations = 1000, verbose = False):
+    def evolve(self, generation_callback = None, max_generations = 2000, verbose = False):
         cont = 0
         while(cont < max_generations):
             self.population = self.sample_class.crossover_population(self.population)
@@ -34,9 +34,15 @@ class Genetic:
             if generation_callback:
                 generation_callback(cont, self.history, self.population)
 
-        self.plot_history("best_sample_score")
+        self.plot_history(["best_sample_score", "mean_samples_score"])
 
     
     def plot_history(self, key):
-        plt.plot(self.history[key], label = key)
+        if isinstance(key, list):
+            for k in key:
+                plt.plot(self.history[k], label = k)
+        else:
+            plt.plot(self.history[key], label = key)
+        
+        plt.legend()
         plt.show()

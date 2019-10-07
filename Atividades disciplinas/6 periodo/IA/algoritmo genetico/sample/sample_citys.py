@@ -81,8 +81,8 @@ class SampleCityPath(Sample):
         new_population.append(choose_population)
         for s1 in choose_population:
             for s2 in random_samples:
-                print(s1.path)
-                print(s1.crossover(s2).path)
+                #print(s1.path)
+                #print(s1.crossover(s2).path)
                 new_population.append(s1.crossover(s2.mutate(0.4)))
 
         """ for s1, mutate_rate in zip(population, population.mutate_rates):
