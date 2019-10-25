@@ -1,20 +1,43 @@
-class Dijktra:
-    def __init__(self, citys, start_city, end_city):
-        pass
+from .path import Path
 
+def small_cost_location(locations):
+    location = locations[0]
 
-    def run(self, city, path):
-        for conection in city.conections:
-            if not conection.traveled:
-                conection.traveled = True
-                path_copy = path.__copy__()
-                path_copy.append()
-                if conection.dest_city.small_path()
+    for c in locations:
+        if c.path.cost < location.path.cost:
+            location = c
+    
+    return location
 
+class Dijkstra:
+    def __init__(self, locations):
+        self.locations = locations
 
-def run(city, visited_citys = [], path = []):
-    visited_citys.append(city)
-    path.append(city)
-    for conection in city.conections:
-        if conection.end_city.
+    def best_path(self, start_location, end_location):
+        self.reset_locations()
+
+        start_location.small_path = Path()
+
+        self.run(start_location)
+
+        if end_location.small_path != None:
+            return end_location.small_path
+
+    def run(self, location, path):
+        current_locations = self.locations.copy()
+
+        while not current_locations:
+            selected_location = small_cost_location(current_locations)
+            current_locations.remove(selected_location)
+            
+            for conection in selected_location.conections:
+                path = selected_location.small_path.copy()
+                path.add_conection(conection)
+                dest_location = conection.dest_location
+                dest_location.set_small_path(path)
+            
+    def reset_locations(self):
+        for location in self.locations:
+            location.reset()
+
             

@@ -1,7 +1,7 @@
 class Path:
-    def __init__(self, conections = None):
-        self.cost = 0
-        self.conections = []
+    def __init__(self, conections = []):
+        self._cost = 0
+        self.conections = conections
 
         if isinstance(conections, list):
             for conection in conections:
@@ -11,11 +11,16 @@ class Path:
         if not self.conections:
             self.__insert(conection)
         else:
-            if self.conections[-1].dest_city == conection.start_city:
+            if self.conections[-1].dest_location == conection.start_location:
                 self.__insert(conection)
 
+    
+    @property
+    def cost(self):
+        return self._cost
+
     def __insert(self, conection):
-        self.cost+=conection.cost
+        self._cost+=conection.cost
         self.conections.append(conection)
 
     
