@@ -5,8 +5,6 @@ class Conection:
         self.traveled = False
         self._cost = cost
 
-        self.start_location.conetions.append(self)
-
-
-    def cost():
+    @property
+    def cost(self):
         return self._cost

@@ -1,10 +1,12 @@
-from .conection import Conection
+from conection import Conection
 
 class Location():
-    def __init__(self, name, pos, conetions = []):
+    def __init__(self, name, pos, conections = []):
+        self.name = name
+        self.pos = pos
         self.small_path = None
         self.location_pos = pos
-        self.conetions = conetions
+        self.conections = conections.copy()
         self.closed = False
 
     def set_small_path(self, path):
@@ -19,5 +21,5 @@ class Location():
 
     def add_conection(self, location, cost):
         if location != self:
-            self.conetions.append(Conection(self, location, cost))
+            self.conections.append(Conection(self, location, cost))
 
