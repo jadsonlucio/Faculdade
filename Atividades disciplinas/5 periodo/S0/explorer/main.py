@@ -1,6 +1,7 @@
 import os
 import sys
-from click import clear
+import platform
+import subprocess
 
 from explorer import get_file_info, get_files_and_subfolders
 
@@ -12,6 +13,10 @@ back :  back one folder \n \
 exit : Quit from application"  
 
 
+
+def clear():
+    command = "cls" if platform.system() == "Windows" else "clear"
+    os.system(command)
 
 def show_files(subfolder_list, files_list):
     print("------------------------------------------------------------------------------------------")
@@ -44,7 +49,7 @@ def show_line(file_name):
         
 
 def update_screen(path):
-    clear
+    clear()
     os.chdir(path)
     subfolder_list, files_list = get_files_and_subfolders("./")
 
@@ -52,15 +57,19 @@ def update_screen(path):
     show_files(subfolder_list, files_list)
 
 
-    commad, args  = input("Input : ").split(" ")
+    commad  = input("Input : ").split(" ")
+    arg = None if len(commad) == 1 else commad[1].replace("\"", "")
+    commad = commad[0]
     commad = commad.lower()
 
     if commad == "open":
-        pass
+        os.startfile(arg)
     elif commad == "cd":
-        update_screen(args)
+        update_screen(arg)
     elif commad == "back":
         update_screen("../")
+    elif commad == "exit":
+        exit()
     else:
         raise Exception("command not found")
 
