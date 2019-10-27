@@ -14,9 +14,9 @@ class PyGameText:
     
     def render(self, surface, text, posX, posY, center = True):
         if center:
-            posY = posY - len(text.split("\n")) * self.size // 2
-            posX = posX - max([len(t) for t in text.split("\n")]) * int(self.size * 0.7)
+            posY = posY - (len(text.split("\n")) - 1) * self.size // 2
 
         for idx, line in enumerate(text.split("\n")):
             text_render = self.pygame_font.render(line, True, self.color)
+            posX = posX - text_render.get_width() - 15
             surface.blit(text_render, (posX, posY + idx * self.size + idx * self.margin))

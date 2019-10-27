@@ -1,9 +1,9 @@
 import json
 import numpy as np
 
-from conection import Conection
+from map.conection import Conection
 
-from math import cos, sin, asin, sqrt, radians
+from math import sin, cos, sqrt, atan2, radians
 
 def calc_distance(lat1, lon1, lat2, lon2):
     """
@@ -15,36 +15,32 @@ def calc_distance(lat1, lon1, lat2, lon2):
     # haversine formula
     dlon = lon2 - lon1
     dlat = lat2 - lat1
-    a = sin(dlat / 2) * 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) * 2
-    c = 2 * asin(sqrt(a))
+
+    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
     km = 6371 * c
     return km
-
-def calc_x_y_points(lat, lon, center_lat = 0, center_lon = 0):
-    x = calc_distance(center_lat, center_lon, center_lat, lon)
-    y = calc_distance(center_lat, center_lon, lat, center_lon)
-
-    return x,y
-
-def dist(coor_1, coor_2):
-    return sum((np.array(coor_1) - np.array(coor_2))**2) ** 0.5
 
 def build_road_struct(locations, road_matrix):
     for ind_location, location in enumerate(locations):
         for ind_dest_location, conected in enumerate(road_matrix[ind_location]):
             if conected:
-                cost = calc_distance(*location.pos, *locations[ind_dest_location].pos)
+                cost = calc_distance(*location.real_pos, *locations[ind_dest_location].real_pos)
                 location.add_conection(locations[ind_dest_location], cost)
 
 
 class Location():
-    def __init__(self, name, pos, conections = []):
+    def __init__(self, name, latitude, longitude, conections = []):
         self.name = name
-        self.pos = pos
+        self._latitude = latitude
+        self._longitude = longitude
+
         self.small_path = None
-        self.location_pos = pos
         self.conections = conections.copy()
         self.closed = False
+
+        self._virtual_pos = None
 
     def set_small_path(self, path):
         if not self.small_path:
@@ -65,20 +61,32 @@ class Location():
                 location.conections.append(Conection(location, self, cost))
                 self.conections.append(Conection(self, location, cost))
 
-    def get_x_y_coor(self, center_lat, center_lon):
-        return calc_x_y_points(self.pos[0], self.pos[1], center_lat, center_lon)
+    def relative_x_y_coor(self, location):
+        latitude, longitude = location.real_pos
+        x = calc_distance(latitude, longitude, self.real_pos[0], longitude)
+        y = calc_distance(latitude, longitude, latitude, self.real_pos[1])
+
+        return x,y
+    
+    def distance(self, location):
+        return calc_distance(*self.pos, *location.pos)
+    
+    @property
+    def virtual_pos(self):
+        return int(self._virtual_pos[0]), int(self._virtual_pos[1])
+
+    @property
+    def real_pos(self):
+        return self._latitude, self._longitude
 
     @classmethod
-    def load_from_json(cls, json_path):
-        with open(json_path, "r") as f:
-            locations_json = json.load(f)
-            locations = []
-            for name, pos in zip(locations_json["locations"], locations_json["positions"]):
-                locations.append(Location(name, pos))
-            
-            build_road_struct(locations, locations_json["road_matrix"])
+    def build_locations(cls, locations_name, locations_pos, road_matrix):
+        locations = []
+        for name, pos in zip(locations_name, locations_pos):
+            latitude, longitude = pos
+            locations.append(Location(name, latitude, longitude))
+        
+        build_road_struct(locations, road_matrix)
 
-            return locations
-
-
+        return locations
 

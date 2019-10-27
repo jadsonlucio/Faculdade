@@ -1,5 +1,12 @@
 {
-    "locations" : ["Brazil", "Argentina", "Chile", "Bolivia", "China"],
-    "positions" : [[0, 1], [0.5, 0.5], [0.1, 0.2], [0.2, 0.1], [0, 0.1]],
-    "road_matrix" : [[0, 1, 1, 1, 1], [1, 0, 0, 1, 1], [1, 1, 0, 1, 1], [1, 1, 1, 0 , 0], [1, 1, 0, 0, 0]]
+    "map_name" : "alagoas",
+    "coordinates" : {
+        "latitude_min" : 48,
+        "latitude_max" : 54,
+        "longitude_min" : 20,
+        "longitude_max" : 30
+    },
+    "locations" : ["local_1", "local_2"],
+    "positions" : [[49, 28.0122287], [52.406374, 16.9251681]],
+    "road_matrix" : [[0, 1], [1, 0]]
 }

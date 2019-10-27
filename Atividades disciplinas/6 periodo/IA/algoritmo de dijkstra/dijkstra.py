@@ -1,4 +1,4 @@
-from path import Path
+from map.path import Path
 
 def small_cost_location(locations):
     locations = [location for location in locations if location.small_path != None]
