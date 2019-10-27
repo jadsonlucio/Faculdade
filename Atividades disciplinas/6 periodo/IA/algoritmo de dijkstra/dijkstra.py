@@ -16,7 +16,6 @@ class Dijkstra:
 
     def best_path(self, start_location, end_location):
         self.reset_locations()
-
         start_location.small_path = Path()
 
         self.run(start_location)
