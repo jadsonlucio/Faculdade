@@ -18,12 +18,14 @@ class Tree():
         raise NotImplementedError("method not implemented")
 
     def _in_order(self, node):
+
         if node.node_left == None:
             arr_esq = []
         else:
             arr_esq = self._in_order(node.node_left)
 
         arr = arr_esq + [node.element]
+
 
         if node.node_right == None:
             arr_dir = []
