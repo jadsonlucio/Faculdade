@@ -20,4 +20,4 @@ if __name__ == "__main__":
     }
 
     results = test_sort_algorithms_with_synthetic_data(dict_sort_algorithms, [10, 100, 250, 500, 750, 1000, 1500, 2000], 1)
-    results.plot_attribute(["bubble sort", "heap sort"], "Número de escritas")
+    results.plot_attribute(["bubble sort", "heap sort" "tree sort avl"], "Número de escritas")
