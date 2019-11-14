@@ -1,0 +1,126 @@
+Jogador Jadson esta tentando pegar a bola
+Jogador Jadson pegou a bola
+Jogador Jose esta tentando pegar a bola
+Jogador Roque esta tentando pegar a bola
+Thread Jose sleeping
+Thread Roque sleeping
+Jogador Jadson ficou 1 segundo(s) com o bola
+Thread Jose wakeup
+Jogador Jadson esta tentando pegar a bola
+Jogador Jose pegou a bola
+Thread Jadson sleeping
+Jogador Jose ficou 1 segundo(s) com o bola
+Thread Roque wakeup
+Jogador Jose esta tentando pegar a bola
+Thread Jose sleeping
+Jogador Roque pegou a bola
+Jogador Roque ficou 1 segundo(s) com o bola
+Thread Jose wakeup
+Jogador Roque esta tentando pegar a bola
+Thread Roque sleeping
+Jogador Jose pegou a bola
+Jogador Jose ficou 2 segundo(s) com o bola
+Thread Jadson wakeup
+Jogador Jose esta tentando pegar a bola
+Thread Jose sleeping
+Jogador Jadson pegou a bola
+Jogador Jadson ficou 1 segundo(s) com o bola
+Thread Roque wakeup
+Jogador Roque pegou a bola
+Jogador Jadson esta tentando pegar a bola
+Thread Jadson sleeping
+Jogador Roque ficou 2 segundo(s) com o bola
+Thread Jadson wakeup
+Jogador Roque esta tentando pegar a bola
+Jogador Jadson pegou a bola
+Thread Roque sleeping
+Jogador Jadson ficou 2 segundo(s) com o bola
+Thread Jose wakeup
+Jogador Jadson esta tentando pegar a bola
+Thread Jadson sleeping
+Jogador Jose pegou a bola
+Jogador Jose ficou 1 segundo(s) com o bola
+Thread Roque wakeup
+Jogador Jose esta tentando pegar a bola
+Thread Jose sleeping
+Jogador Roque pegou a bola
+Jogador Roque ficou 1 segundo(s) com o bola
+Thread Jose wakeup
+Jogador Roque esta tentando pegar a bola
+Jogador Jose pegou a bola
+Thread Roque sleeping
+Jogador Jose ficou 1 segundo(s) com o bola
+Thread Roque wakeup
+Jogador Roque pegou a bola
+Jogador Jose esta tentando pegar a bola
+Thread Jose sleeping
+Jogador Roque ficou 1 segundo(s) com o bola
+Thread Jadson wakeup
+Jogador Roque esta tentando pegar a bola
+Thread Roque sleeping
+Jogador Jadson pegou a bola
+Jogador Jadson ficou 2 segundo(s) com o bola
+Thread Roque wakeup
+Jogador Jadson esta tentando pegar a bola
+Thread Jadson sleeping
+Jogador Roque pegou a bola
+Jogador Roque ficou 1 segundo(s) com o bola
+Thread Jadson wakeup
+Jogador Roque esta tentando pegar a bola
+Thread Roque sleeping
+Jogador Jadson pegou a bola
+Jogador Jadson ficou 2 segundo(s) com o bola
+Thread Jose wakeup
+Jogador Jadson esta tentando pegar a bola
+Thread Jadson sleeping
+Jogador Jose pegou a bola
+Jogador Jose ficou 1 segundo(s) com o bola
+Thread Roque wakeup
+Jogador Jose esta tentando pegar a bola
+Thread Jose sleeping
+Jogador Roque pegou a bola
+Jogador Roque ficou 2 segundo(s) com o bola
+Thread Jose wakeup
+Jogador Roque esta tentando pegar a bola
+Thread Roque sleeping
+Jogador Jose pegou a bola
+Jogador Jose ficou 2 segundo(s) com o bola
+Thread Roque wakeup
+Jogador Jose esta tentando pegar a bola
+Thread Jose sleeping
+Jogador Roque pegou a bola
+Jogador Roque ficou 2 segundo(s) com o bola
+Thread Jadson wakeup
+Jogador Roque esta tentando pegar a bola
+Thread Roque sleeping
+Jogador Jadson pegou a bola
+Jogador Jadson ficou 1 segundo(s) com o bola
+Thread Roque wakeup
+Jogador Jadson esta tentando pegar a bola
+Thread Jadson sleeping
+Jogador Roque pegou a bola
+Jogador Roque ficou 1 segundo(s) com o bola
+Thread Jadson wakeup
+Jogador Roque esta tentando pegar a bola
+Thread Roque sleeping
+Jogador Jadson pegou a bola
+Jogador Jadson ficou 2 segundo(s) com o bola
+Thread Jose wakeup
+Jogador Jadson esta tentando pegar a bola
+Thread Jadson sleeping
+Jogador Jose pegou a bola
+Jogador Jose ficou 2 segundo(s) com o bola
+Thread Roque wakeup
+Jogador Jose esta tentando pegar a bola
+Thread Jose sleeping
+Jogador Roque pegou a bola
+Jogador Roque ficou 1 segundo(s) com o bola
+Thread Jose wakeup
+Jogador Roque esta tentando pegar a bola
+Thread Roque sleeping
+Jogador Jose pegou a bola
+Jogador Jose ficou 2 segundo(s) com o bola
+Thread Jadson wakeup
+Jogador Jose esta tentando pegar a bola
+Thread Jose sleeping
+Jogador Jadson pegou a bola
