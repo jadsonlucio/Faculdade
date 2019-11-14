@@ -10,8 +10,10 @@ from graphs.classification_plot import PygameClassifierPlot
  
 
 def test_neuron(neuron, screen):
-    train_x = [[0, 0], [0, 1], [1,0], [1,1]]
-    train_y = [0, 1, 1, 1]
+    train_x = [[-1, -1], [0, 1], [-1,-3], [5,1], [3, -3], [1, -1]]
+    train_y = [1, 0, 1, 0, 1, 0]
+    
+    screen.add_prediction_points(train_x, train_y)
 
     while(True):
         pred = []
@@ -22,6 +24,8 @@ def test_neuron(neuron, screen):
 
         screen.update_screen_predictions()
 
+        print(neuron._weights)
+        print(pred)
         if mse(train_y, pred) == 0:
             print(neuron._weights)
             print(pred)

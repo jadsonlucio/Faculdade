@@ -1,4 +1,5 @@
 import pygame 
+import numpy as np
 
 class PygameClassifierPlot:
     def __init__(self, model_classifier):
@@ -16,6 +17,7 @@ class PygameClassifierPlot:
         self.height = 400
         self._display = pygame.display.set_mode((self.width, self.height))
         self.cartesian_surface = pygame.Surface((self.width, self.height))
+        self.prediction_surface = pygame.Surface((self.width, self.height))
 
     def on_screen(self):
         pass
@@ -62,8 +64,24 @@ class PygameClassifierPlot:
 
         return x,y
 
+    
+    def cartesian_to_pixel_point(self, cartesian_point):
+        x_half_screen_size = self.width / 2
+        y_half_screen_size = self.height / 2
+
+        x, y = cartesian_point     
+        x_grid_size = abs(self.x_range[1] - self.x_range[0])
+        y_grid_size = abs(self.y_range[1] - self.y_range[0])
+
+        x_units_pixel_size = int(self.width / x_grid_size)
+        y_units_pixel_size = int(self.height / y_grid_size)
+
+        return x_half_screen_size + x * x_units_pixel_size, y_half_screen_size + y * y_units_pixel_size
+
+
     def update_screen_predictions(self):
-        pixels_array = pygame.PixelArray(pygame.Surface((self.width, self.height)))
+        surface = pygame.Surface((self.width, self.height))
+        pixels = []
         for i in range(self.width):
             row = []
             for j in range(self.height):
@@ -71,16 +89,30 @@ class PygameClassifierPlot:
                 result = self.model_classifier.output([x, y])
 
                 if result:
-                    pixels_array[i, j] = (255, 255, 0)
+                    row.append((0, 0, 255))
                 else:
-                    pixels_array[i, j] = (255, 255, 0)
-
+                    row.append((255, 0, 0))
+            
+            pixels.append(row)
         
-        #self.cartesian_surface = pixels_array.surface
-        self.set_cartesian_surface()
-        pixels_array.close()
-    
-        pygame.image.save(pixels_array.surface, "file.png")
+
+
+        pygame.pixelcopy.array_to_surface(surface, np.array(pixels))
+        surface.set_alpha(40)
+
+        self.prediction_surface = surface
+
+    def add_prediction_points(self, X, y):
+        for inputs, output in zip(X, y):
+            if output:
+                color = (0, 0, 255)
+            else:
+                color = (255, 0, 0)
+
+            inputs = self.cartesian_to_pixel_point(inputs)
+            
+            pygame.draw.rect(self.cartesian_surface, color, pygame.Rect(inputs, (10, 10)))
+
 
     def run(self):
         self.set_cartesian_surface()
@@ -94,6 +126,7 @@ class PygameClassifierPlot:
                         self.on_event(event)
 
             self._display.blit(self.cartesian_surface, (0,0))
+            self._display.blit(self.prediction_surface, (0, 0))
             self.on_screen()
 
             pygame.display.flip()
