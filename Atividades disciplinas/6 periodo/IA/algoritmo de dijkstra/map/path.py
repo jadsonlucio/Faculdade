@@ -36,3 +36,6 @@ class Path:
         
         response+=f"\ncost : {self.cost}"
         return response
+
+    def __iter__(self):
+        return iter(self.conections)

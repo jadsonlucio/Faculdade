@@ -90,6 +90,8 @@ class MapDraw():
         for location in self.map.locations:
             self.draw_location(location)
 
+        self.draw_locations_names()
+
 
     def draw_location(self, location):
         pos = location.virtual_pos
@@ -109,3 +111,24 @@ class MapDraw():
             for conection in path.conections:
                 pygame.draw.line(self.screen, COLOR_CONECTION_USED,
                     conection.start_location.virtual_pos, conection.dest_location.virtual_pos, 10)
+
+    
+    def draw_locations_names(self):
+        city_names = ""
+        surface_text_roads = pygame.Surface((200, self.height))
+        surface_text_roads.fill((0, 0, 0))
+        
+        for location in self.map.selected_citys[1:]:
+            for conection in location.small_path:
+                city_names += conection.dest_location.name[:-1] + "  " +str(int(conection.cost)) + "km" + "\n"
+
+
+        #font = pygame.font.Font("freesansbold.ttf", 12)
+        #font_surface = font.render(city_names, True, (255, 0, 255))
+        surface_text_roads.set_alpha(150)
+        self.pygame_text.render(surface_text_roads, city_names, 0, 0, False)
+        self.screen.blit(surface_text_roads, (0, 0))
+        
+        #self.screen.blit(font_surface, (0, 0))
+
+        

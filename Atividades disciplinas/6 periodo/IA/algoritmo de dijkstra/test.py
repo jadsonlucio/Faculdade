@@ -21,7 +21,7 @@ def generate_random_sample(locations_names, latitude_min, latitude_max,
     
     for i in range(len(locations)):
         for j in range(i + 1, len(locations), 1):
-            if np.random.random() > 0.5:
+            if np.random.random() > 0.7:
                 cost = calc_distance(*locations[i].real_pos, *locations[j].real_pos)
                 locations[i].add_conection(locations[j], cost)  
 
