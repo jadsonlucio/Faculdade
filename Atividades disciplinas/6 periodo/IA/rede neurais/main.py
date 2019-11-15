@@ -24,15 +24,18 @@ def test_neuron(neuron, screen):
 
         screen.update_screen_predictions()
 
-        print(neuron._weights)
-        print(pred)
+        print(neuron.log(train_x, train_y))
+
         if mse(train_y, pred) == 0:
             print(neuron._weights)
             print(pred)
             break
 
 def test_pygame_classifier_plot():
-    neuron = BaseNeuron(2, partial(limiar, limiar_value = 0.5))
+    def limiar_0_5(value):
+        return limiar(value, 0.5)
+
+    neuron = BaseNeuron(2, limiar_0_5)
     screen = PygameClassifierPlot(neuron)
 
     thread = threading.Thread(target = test_neuron, args = (neuron, screen))

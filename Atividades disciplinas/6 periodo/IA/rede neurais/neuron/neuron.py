@@ -17,7 +17,6 @@ class BaseNeuron:
             self._weights = np.array(weights)
 
     def output(self, X):
-
         X = np.array(X)
         return self.activation_func(sum(self._weights * X))
 
@@ -27,3 +26,15 @@ class BaseNeuron:
         erro = y - output
                 
         self._weights += X * erro * self.learning_rate
+
+    
+    def log(self, X, y):
+        text = ""
+        for inputs, output in zip(X, y):
+            for x, w in zip(inputs[:-1], self._weights[:-1]):
+                text += f"{self.activation_func.__name__}({x} * {w} + "
+
+            prediction = self.output(inputs)
+            text += f"{inputs[-1]} * {self.weights[-1]}) = {prediction}, esperado : {output} \n"
+        
+        return text
