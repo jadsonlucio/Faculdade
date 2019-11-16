@@ -1,23 +1,33 @@
-from test_algorithm import test_sort_algorithms_with_synthetic_data
+from paper_graphs import plot_synthetic_arrays_attribute, plot_attribute_results_line_plot
+from paper_experiments import test_sort_algorithms_with_synthetic_arrays, test_sort_algorithms_with_shuffle_arrays
 
-from sort_algorithms.bubble_sort.bubble_sort import BubbleSort
-from sort_algorithms.heap_sort.heap_sort import HeapSort
-from sort_algorithms.tree_sort.tree_sort import TreeSort
-from sort_algorithms.tree_sort.trees.normal_tree import NormalTree
-from sort_algorithms.tree_sort.trees.avl_tree import AVLTree
 
+def plot_synthetic_arrays(attribute):
+    selected_algorithms = ["bubble sort", "tree sort avl", "heap sort"]
+    arrays_size = [10, 100, 1000, 2000]
+    results = test_sort_algorithms_with_synthetic_arrays(selected_algorithms, arrays_size)
+
+    plot_synthetic_arrays_attribute(results, selected_algorithms, attribute)
+
+
+def plot_algorithms_with_shuffle_arrays(attribute):
+    selected_algorithms = ["bubble sort", "insertion sort", "quick sort", "merge sort", "heap sort", "selection sort"]
+    array_size = 500
+    shuffle_percentages = [0, 10, 15, 25, 40, 50, 65, 75, 100]
+    results = test_sort_algorithms_with_shuffle_arrays(selected_algorithms, array_size, shuffle_percentages)
+
+    plot_attribute_results_line_plot(results, {}, "Porcentagem de desordenação", attribute)
+
+def barplot_algorithms_std_with_shuffle_arrays(attribute):
+    selected_algorithms = ["bubble sort", "insertion sort", "quick sort", "merge sort", "heap sort", "selection sort"]
+    array_size = 500
+    shuffle_percentages = [0, 10, 15, 25, 40, 50, 65, 75, 100]
+    results = test_sort_algorithms_with_shuffle_arrays(selected_algorithms, array_size, shuffle_percentages)
+    dataframe = results.dataframe
+    dataframe = dataframe[dataframe["atributo"] == attribute]
+
+    for algorithm, dataframe in results.dataframe.groupby("Nome do algoritmo"):
+        print(algorithm, dataframe["Valor"].std() / dataframe["Valor"].mean())
 
 if __name__ == "__main__":
-    tree_sort_normal = TreeSort(NormalTree, mode = "iterative")
-    tree_sort_avl = TreeSort(AVLTree)
-    bubble_sort = BubbleSort()
-    heap_sort = HeapSort()
-
-    dict_sort_algorithms = {
-        "tree sort avl" : tree_sort_avl, 
-        "bubble sort" : bubble_sort,
-        "heap sort" : heap_sort
-    }
-
-    results = test_sort_algorithms_with_synthetic_data(dict_sort_algorithms, [10, 100, 250, 500, 750, 1000, 1500, 2000], 1)
-    results.plot_attribute(["bubble sort", "heap sort" "tree sort avl"], "Número de escritas")
+    barplot_algorithms_std_with_shuffle_arrays("time to run")

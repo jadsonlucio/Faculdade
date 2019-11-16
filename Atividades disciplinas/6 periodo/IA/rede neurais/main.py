@@ -11,7 +11,7 @@ from graphs.classification_plot import PygameClassifierPlot
 
 def test_neuron(neuron, screen):
     train_x = [[-1, -1], [0, 1], [-1,-3], [5,1], [3, -3], [1, -1]]
-    train_y = [1, 0, 1, 0, 1, 0]
+    train_y = [1, 0, 0, 0, 1, 1]
     
     screen.add_prediction_points(train_x, train_y)
 

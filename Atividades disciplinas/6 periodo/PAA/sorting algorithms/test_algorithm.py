@@ -1,7 +1,7 @@
 import sys
 import numpy as np
 from random import randint
-from results import Results
+#from results import Results
 
 #sys.setrecursionlimit(10000000)
 
@@ -55,4 +55,21 @@ def test_sort_algorithms_with_synthetic_data(sort_objs_dict, arrays_sizes, numbe
         print(sort_obj_name)
         results_dict[sort_obj_name] = test_synthetic_arrays(sort_obj, arrays_sizes, number_iterations)
 
-    return Results(results_dict)
+    return results_dict
+
+
+def test_sort_algorithms(sort_objs_dict, arrays_objs_dict, num_iterations = 1):
+    results_dict = {}
+
+    for sort_obj_name, sort_obj in sort_objs_dict.items():
+        sort_algorthm_results = {}
+
+        for label, array in arrays_objs_dict.items():
+            sort_algorthm_results[label] = test_sort_algorithm_time_execution(
+                sort_obj, array, num_iterations
+            )
+
+        results_dict[sort_obj_name] = sort_algorthm_results
+
+    
+    return results_dict

@@ -30,11 +30,13 @@ class BaseNeuron:
     
     def log(self, X, y):
         text = ""
+        weights = [round(weight, 3) for weight in self._weights]
+
         for inputs, output in zip(X, y):
-            for x, w in zip(inputs[:-1], self._weights[:-1]):
+            for x, w in zip(inputs[:-1], weights[:-1]):
                 text += f"{self.activation_func.__name__}({x} * {w} + "
 
             prediction = self.output(inputs)
-            text += f"{inputs[-1]} * {self.weights[-1]}) = {prediction}, esperado : {output} \n"
+            text += f"{inputs[-1]} * {weights[-1]}) = {prediction}, esperado : {output} \n"
         
         return text
