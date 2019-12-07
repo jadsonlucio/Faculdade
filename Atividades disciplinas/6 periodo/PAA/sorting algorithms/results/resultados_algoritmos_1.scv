@@ -1,0 +1,169 @@
+,Nome do algoritmo,Tamanho entrada,Tipo array,atributo,Valor,Tempo (s),Tempo de execução (s)
+0,tree sort avl,1000,Ordem crescente,Tempo de execução,0.020544000000000118,0.020544000000000118,0.020544000000000118
+1,tree sort avl,1000,Ordem crescente,Número de comparações,9967.0,9967.0,9967.0
+2,tree sort avl,1000,Ordem crescente,Número de escritas,0.0,0.0,0.0
+3,tree sort avl,1000,Ordem crescente,Tamánho,1000.0,1000.0,1000.0
+4,tree sort avl,1000,Ordem crescente,time_to_insert,0.020117000000000385,0.020117000000000385,0.020117000000000385
+5,tree sort avl,1000,Ordem crescente,time_to_inorder_travel,-0.00031300000000022976,-0.00031300000000022976,-0.00031300000000022976
+6,tree sort avl,1000,Ordem decrescente,Tempo de execução,0.01634700000000011,0.01634700000000011,0.01634700000000011
+7,tree sort avl,1000,Ordem decrescente,Número de comparações,9967.0,9967.0,9967.0
+8,tree sort avl,1000,Ordem decrescente,Número de escritas,0.0,0.0,0.0
+9,tree sort avl,1000,Ordem decrescente,Tamánho,1000.0,1000.0,1000.0
+10,tree sort avl,1000,Ordem decrescente,time_to_insert,0.015969000000000122,0.015969000000000122,0.015969000000000122
+11,tree sort avl,1000,Ordem decrescente,time_to_inorder_travel,-0.00031399999999992545,-0.00031399999999992545,-0.00031399999999992545
+12,tree sort avl,1000,Desordenado,Tempo de execução,0.016523000000000287,0.016523000000000287,0.016523000000000287
+13,tree sort avl,1000,Desordenado,Número de comparações,9403.0,9403.0,9403.0
+14,tree sort avl,1000,Desordenado,Número de escritas,0.0,0.0,0.0
+15,tree sort avl,1000,Desordenado,Tamánho,1000.0,1000.0,1000.0
+16,tree sort avl,1000,Desordenado,time_to_insert,0.015996000000000343,0.015996000000000343,0.015996000000000343
+17,tree sort avl,1000,Desordenado,time_to_inorder_travel,-0.0004499999999998394,-0.0004499999999998394,-0.0004499999999998394
+18,tree sort avl,10000,Ordem crescente,Tempo de execução,0.22018800000000027,0.22018800000000027,0.22018800000000027
+19,tree sort avl,10000,Ordem crescente,Número de comparações,133603.0,133603.0,133603.0
+20,tree sort avl,10000,Ordem crescente,Número de escritas,0.0,0.0,0.0
+21,tree sort avl,10000,Ordem crescente,Tamánho,10000.0,10000.0,10000.0
+22,tree sort avl,10000,Ordem crescente,time_to_insert,0.2154440000000002,0.2154440000000002,0.2154440000000002
+23,tree sort avl,10000,Ordem crescente,time_to_inorder_travel,-0.003794000000000075,-0.003794000000000075,-0.003794000000000075
+24,tree sort avl,10000,Ordem decrescente,Tempo de execução,0.21739299999999995,0.21739299999999995,0.21739299999999995
+25,tree sort avl,10000,Ordem decrescente,Número de comparações,133603.0,133603.0,133603.0
+26,tree sort avl,10000,Ordem decrescente,Número de escritas,0.0,0.0,0.0
+27,tree sort avl,10000,Ordem decrescente,Tamánho,10000.0,10000.0,10000.0
+28,tree sort avl,10000,Ordem decrescente,time_to_insert,0.21315300000000015,0.21315300000000015,0.21315300000000015
+29,tree sort avl,10000,Ordem decrescente,time_to_inorder_travel,-0.0032879999999999576,-0.0032879999999999576,-0.0032879999999999576
+30,tree sort avl,10000,Desordenado,Tempo de execução,0.3008860000000002,0.3008860000000002,0.3008860000000002
+31,tree sort avl,10000,Desordenado,Número de comparações,127876.0,127876.0,127876.0
+32,tree sort avl,10000,Desordenado,Número de escritas,0.0,0.0,0.0
+33,tree sort avl,10000,Desordenado,Tamánho,10000.0,10000.0,10000.0
+34,tree sort avl,10000,Desordenado,time_to_insert,0.2953739999999998,0.2953739999999998,0.2953739999999998
+35,tree sort avl,10000,Desordenado,time_to_inorder_travel,-0.0042480000000000295,-0.0042480000000000295,-0.0042480000000000295
+36,tree sort avl,100000,Ordem crescente,Tempo de execução,2.8927409999999996,2.8927409999999996,2.8927409999999996
+37,tree sort avl,100000,Ordem crescente,Número de comparações,1668912.0,1668912.0,1668912.0
+38,tree sort avl,100000,Ordem crescente,Número de escritas,0.0,0.0,0.0
+39,tree sort avl,100000,Ordem crescente,Tamánho,100000.0,100000.0,100000.0
+40,tree sort avl,100000,Ordem crescente,time_to_insert,2.847925,2.847925,2.847925
+41,tree sort avl,100000,Ordem crescente,time_to_inorder_travel,-0.033343999999999596,-0.033343999999999596,-0.033343999999999596
+42,tree sort avl,100000,Ordem decrescente,Tempo de execução,2.8839690000000004,2.8839690000000004,2.8839690000000004
+43,tree sort avl,100000,Ordem decrescente,Número de comparações,1668912.0,1668912.0,1668912.0
+44,tree sort avl,100000,Ordem decrescente,Número de escritas,0.0,0.0,0.0
+45,tree sort avl,100000,Ordem decrescente,Tamánho,100000.0,100000.0,100000.0
+46,tree sort avl,100000,Ordem decrescente,time_to_insert,2.828187999999999,2.828187999999999,2.828187999999999
+47,tree sort avl,100000,Ordem decrescente,time_to_inorder_travel,-0.03960399999999886,-0.03960399999999886,-0.03960399999999886
+48,tree sort avl,100000,Desordenado,Tempo de execução,3.7133509999999994,3.7133509999999994,3.7133509999999994
+49,tree sort avl,100000,Desordenado,Número de comparações,1617667.0,1617667.0,1617667.0
+50,tree sort avl,100000,Desordenado,Número de escritas,0.0,0.0,0.0
+51,tree sort avl,100000,Desordenado,Tamánho,100000.0,100000.0,100000.0
+52,tree sort avl,100000,Desordenado,time_to_insert,3.597225,3.597225,3.597225
+53,tree sort avl,100000,Desordenado,time_to_inorder_travel,-0.07528499999999916,-0.07528499999999916,-0.07528499999999916
+54,tree sort avl,1000000,Ordem crescente,Tempo de execução,34.278893999999994,34.278893999999994,34.278893999999994
+55,tree sort avl,1000000,Ordem crescente,Número de comparações,19951405.0,19951405.0,19951405.0
+56,tree sort avl,1000000,Ordem crescente,Número de escritas,0.0,0.0,0.0
+57,tree sort avl,1000000,Ordem crescente,Tamánho,1000000.0,1000000.0,1000000.0
+58,tree sort avl,1000000,Ordem crescente,time_to_insert,33.835757,33.835757,33.835757
+59,tree sort avl,1000000,Ordem crescente,time_to_inorder_travel,-0.32993199999999945,-0.32993199999999945,-0.32993199999999945
+60,tree sort avl,1000000,Ordem decrescente,Tempo de execução,34.63778,34.63778,34.63778
+61,tree sort avl,1000000,Ordem decrescente,Número de comparações,19951405.0,19951405.0,19951405.0
+62,tree sort avl,1000000,Ordem decrescente,Número de escritas,0.0,0.0,0.0
+63,tree sort avl,1000000,Ordem decrescente,Tamánho,1000000.0,1000000.0,1000000.0
+64,tree sort avl,1000000,Ordem decrescente,time_to_insert,34.16773,34.16773,34.16773
+65,tree sort avl,1000000,Ordem decrescente,time_to_inorder_travel,-0.34900500000000534,-0.34900500000000534,-0.34900500000000534
+66,tree sort avl,1000000,Desordenado,Tempo de execução,55.57811499999998,55.57811499999998,55.57811499999998
+67,tree sort avl,1000000,Desordenado,Número de comparações,19537229.0,19537229.0,19537229.0
+68,tree sort avl,1000000,Desordenado,Número de escritas,0.0,0.0,0.0
+69,tree sort avl,1000000,Desordenado,Tamánho,1000000.0,1000000.0,1000000.0
+70,tree sort avl,1000000,Desordenado,time_to_insert,54.108318999999995,54.108318999999995,54.108318999999995
+71,tree sort avl,1000000,Desordenado,time_to_inorder_travel,-0.9323129999999935,-0.9323129999999935,-0.9323129999999935
+72,heap sort,1000,Ordem crescente,Tempo de execução,0.011780000000015889,0.011780000000015889,0.011780000000015889
+73,heap sort,1000,Ordem crescente,Número de comparações,17583.0,17583.0,17583.0
+74,heap sort,1000,Ordem crescente,Número de escritas,29124.0,29124.0,29124.0
+75,heap sort,1000,Ordem crescente,Tamánho,1000.0,1000.0,1000.0
+76,heap sort,1000,Ordem decrescente,Tempo de execução,0.00999699999999848,0.00999699999999848,0.00999699999999848
+77,heap sort,1000,Ordem decrescente,Número de comparações,15965.0,15965.0,15965.0
+78,heap sort,1000,Ordem decrescente,Número de escritas,24948.0,24948.0,24948.0
+79,heap sort,1000,Ordem decrescente,Tamánho,1000.0,1000.0,1000.0
+80,heap sort,1000,Desordenado,Tempo de execução,0.010911999999990485,0.010911999999990485,0.010911999999990485
+81,heap sort,1000,Desordenado,Número de comparações,16869.0,16869.0,16869.0
+82,heap sort,1000,Desordenado,Número de escritas,27222.0,27222.0,27222.0
+83,heap sort,1000,Desordenado,Tamánho,1000.0,1000.0,1000.0
+84,heap sort,10000,Ordem crescente,Tempo de execução,0.16301999999998884,0.16301999999998884,0.16301999999998884
+85,heap sort,10000,Ordem crescente,Número de comparações,244460.0,244460.0,244460.0
+86,heap sort,10000,Ordem crescente,Número de escritas,395868.0,395868.0,395868.0
+87,heap sort,10000,Ordem crescente,Tamánho,10000.0,10000.0,10000.0
+88,heap sort,10000,Ordem decrescente,Tempo de execução,0.14988700000000676,0.14988700000000676,0.14988700000000676
+89,heap sort,10000,Ordem decrescente,Número de comparações,226682.0,226682.0,226682.0
+90,heap sort,10000,Ordem decrescente,Número de escritas,350088.0,350088.0,350088.0
+91,heap sort,10000,Ordem decrescente,Tamánho,10000.0,10000.0,10000.0
+92,heap sort,10000,Desordenado,Tempo de execução,0.16199399999999287,0.16199399999999287,0.16199399999999287
+93,heap sort,10000,Desordenado,Número de comparações,235296.0,235296.0,235296.0
+94,heap sort,10000,Desordenado,Número de escritas,372324.0,372324.0,372324.0
+95,heap sort,10000,Desordenado,Tamánho,10000.0,10000.0,10000.0
+96,heap sort,100000,Ordem crescente,Tempo de execução,2.1064010000000053,2.1064010000000053,2.1064010000000053
+97,heap sort,100000,Ordem crescente,Número de comparações,3112517.0,3112517.0,3112517.0
+98,heap sort,100000,Ordem crescente,Número de escritas,4952562.0,4952562.0,4952562.0
+99,heap sort,100000,Ordem crescente,Tamánho,100000.0,100000.0,100000.0
+100,heap sort,100000,Ordem decrescente,Tempo de execução,2.0638820000000067,2.0638820000000067,2.0638820000000067
+101,heap sort,100000,Ordem decrescente,Número de comparações,2926640.0,2926640.0,2926640.0
+102,heap sort,100000,Ordem decrescente,Número de escritas,4492302.0,4492302.0,4492302.0
+103,heap sort,100000,Ordem decrescente,Tamánho,100000.0,100000.0,100000.0
+104,heap sort,100000,Desordenado,Tempo de execução,2.620018000000016,2.620018000000016,2.620018000000016
+105,heap sort,100000,Desordenado,Número de comparações,3019520.0,3019520.0,3019520.0
+106,heap sort,100000,Desordenado,Número de escritas,4724211.0,4724211.0,4724211.0
+107,heap sort,100000,Desordenado,Tamánho,100000.0,100000.0,100000.0
+108,heap sort,1000000,Ordem crescente,Tempo de execução,25.901432,25.901432,25.901432
+109,heap sort,1000000,Ordem crescente,Número de comparações,37692069.0,37692069.0,37692069.0
+110,heap sort,1000000,Ordem crescente,Número de escritas,59363376.0,59363376.0,59363376.0
+111,heap sort,1000000,Ordem crescente,Tamánho,1000000.0,1000000.0,1000000.0
+112,heap sort,1000000,Ordem decrescente,Tempo de execução,25.860640999999987,25.860640999999987,25.860640999999987
+113,heap sort,1000000,Ordem decrescente,Número de comparações,36001436.0,36001436.0,36001436.0
+114,heap sort,1000000,Ordem decrescente,Número de escritas,55000224.0,55000224.0,55000224.0
+115,heap sort,1000000,Ordem decrescente,Tamánho,1000000.0,1000000.0,1000000.0
+116,heap sort,1000000,Desordenado,Tempo de execução,40.459126999999995,40.459126999999995,40.459126999999995
+117,heap sort,1000000,Desordenado,Número de comparações,36795665.0,36795665.0,36795665.0
+118,heap sort,1000000,Desordenado,Número de escritas,57146832.0,57146832.0,57146832.0
+119,heap sort,1000000,Desordenado,Tamánho,1000000.0,1000000.0,1000000.0
+120,tim sort,1000,Ordem crescente,Tempo de execução,0.0002659999999821139,0.0002659999999821139,0.0002659999999821139
+121,tim sort,1000,Ordem crescente,Número de comparações,999.0,999.0,999.0
+122,tim sort,1000,Ordem crescente,Número de escritas,0.0,0.0,0.0
+123,tim sort,1000,Ordem crescente,Tamánho,1000.0,1000.0,1000.0
+124,tim sort,1000,Ordem decrescente,Tempo de execução,0.0002800000000036107,0.0002800000000036107,0.0002800000000036107
+125,tim sort,1000,Ordem decrescente,Número de comparações,999.0,999.0,999.0
+126,tim sort,1000,Ordem decrescente,Número de escritas,0.0,0.0,0.0
+127,tim sort,1000,Ordem decrescente,Tamánho,1000.0,1000.0,1000.0
+128,tim sort,1000,Desordenado,Tempo de execução,0.0022120000000143136,0.0022120000000143136,0.0022120000000143136
+129,tim sort,1000,Desordenado,Número de comparações,8642.0,8642.0,8642.0
+130,tim sort,1000,Desordenado,Número de escritas,0.0,0.0,0.0
+131,tim sort,1000,Desordenado,Tamánho,1000.0,1000.0,1000.0
+132,tim sort,10000,Ordem crescente,Tempo de execução,0.002672999999987269,0.002672999999987269,0.002672999999987269
+133,tim sort,10000,Ordem crescente,Número de comparações,9999.0,9999.0,9999.0
+134,tim sort,10000,Ordem crescente,Número de escritas,0.0,0.0,0.0
+135,tim sort,10000,Ordem crescente,Tamánho,10000.0,10000.0,10000.0
+136,tim sort,10000,Ordem decrescente,Tempo de execução,0.002517000000011649,0.002517000000011649,0.002517000000011649
+137,tim sort,10000,Ordem decrescente,Número de comparações,9999.0,9999.0,9999.0
+138,tim sort,10000,Ordem decrescente,Número de escritas,0.0,0.0,0.0
+139,tim sort,10000,Ordem decrescente,Tamánho,10000.0,10000.0,10000.0
+140,tim sort,10000,Desordenado,Tempo de execução,0.03186700000000542,0.03186700000000542,0.03186700000000542
+141,tim sort,10000,Desordenado,Número de comparações,119878.0,119878.0,119878.0
+142,tim sort,10000,Desordenado,Número de escritas,0.0,0.0,0.0
+143,tim sort,10000,Desordenado,Tamánho,10000.0,10000.0,10000.0
+144,tim sort,100000,Ordem crescente,Tempo de execução,0.026935999999977867,0.026935999999977867,0.026935999999977867
+145,tim sort,100000,Ordem crescente,Número de comparações,99999.0,99999.0,99999.0
+146,tim sort,100000,Ordem crescente,Número de escritas,0.0,0.0,0.0
+147,tim sort,100000,Ordem crescente,Tamánho,100000.0,100000.0,100000.0
+148,tim sort,100000,Ordem decrescente,Tempo de execução,0.026709000000010974,0.026709000000010974,0.026709000000010974
+149,tim sort,100000,Ordem decrescente,Número de comparações,99999.0,99999.0,99999.0
+150,tim sort,100000,Ordem decrescente,Número de escritas,0.0,0.0,0.0
+151,tim sort,100000,Ordem decrescente,Tamánho,100000.0,100000.0,100000.0
+152,tim sort,100000,Desordenado,Tempo de execução,0.5691150000000107,0.5691150000000107,0.5691150000000107
+153,tim sort,100000,Desordenado,Número de comparações,1529221.0,1529221.0,1529221.0
+154,tim sort,100000,Desordenado,Número de escritas,0.0,0.0,0.0
+155,tim sort,100000,Desordenado,Tamánho,100000.0,100000.0,100000.0
+156,tim sort,1000000,Ordem crescente,Tempo de execução,0.2787229999999852,0.2787229999999852,0.2787229999999852
+157,tim sort,1000000,Ordem crescente,Número de comparações,999999.0,999999.0,999999.0
+158,tim sort,1000000,Ordem crescente,Número de escritas,0.0,0.0,0.0
+159,tim sort,1000000,Ordem crescente,Tamánho,1000000.0,1000000.0,1000000.0
+160,tim sort,1000000,Ordem decrescente,Tempo de execução,0.2768379999999979,0.2768379999999979,0.2768379999999979
+161,tim sort,1000000,Ordem decrescente,Número de comparações,999999.0,999999.0,999999.0
+162,tim sort,1000000,Ordem decrescente,Número de escritas,0.0,0.0,0.0
+163,tim sort,1000000,Ordem decrescente,Tamánho,1000000.0,1000000.0,1000000.0
+164,tim sort,1000000,Desordenado,Tempo de execução,10.124993000000018,10.124993000000018,10.124993000000018
+165,tim sort,1000000,Desordenado,Número de comparações,18606056.0,18606056.0,18606056.0
+166,tim sort,1000000,Desordenado,Número de escritas,0.0,0.0,0.0
+167,tim sort,1000000,Desordenado,Tamánho,1000000.0,1000000.0,1000000.0

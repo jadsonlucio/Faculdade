@@ -9,6 +9,39 @@ def is_orded(array):
 
     return True
 
+class Element():
+    def __init__(self, obj):
+        self.obj = obj
+        self.num_comparations = 0
+
+    def __gt__(self, other):
+        self.num_comparations += 1
+
+        return self.obj > other.obj
+    
+    def __lt__(self, other):
+        self.num_comparations += 1
+        
+        return self.obj < other.obj
+
+    def __eq__(self, other):
+        self.num_comparations += 1
+
+        return self.obj == other.obj
+
+    def __le__(self, other):
+        self.num_comparations += 1
+
+        return self.obj <= other.obj
+    
+    def __ge__(self, other):
+        self.num_comparations += 1
+
+        return self.obj >= other.obj
+
+    def __str__(self):
+        return str(self.obj)
+
 class Sort:
     def __init__(self):
         self.time_to_sort = None
@@ -19,6 +52,7 @@ class Sort:
     
     def sort(self, elements, *args, **kwargs):
         self.reset()
+        elements = [Element(element) for element in elements]
         self.quant_elements = len(elements)
 
         time_ini = clock()
@@ -27,6 +61,11 @@ class Sort:
 
         self.time_to_sort = clock() - time_ini
         self.run = True
+        self.number_comparations = 0
+
+        for i, element in enumerate(elements):
+            self.number_comparations += int(element.num_comparations/2)
+            elements[i] = element.obj
 
         if len(elements) != self.quant_elements:
             print(elements)
@@ -44,10 +83,10 @@ class Sort:
     def info(self):
         complement_info = self._info()
         info = {
-            "time to run" : self.time_to_sort,
-            "number comparations" : self.number_comparations,
+            "Tempo de execução" : self.time_to_sort,
+            "Número de comparações" : self.number_comparations,
             "Número de escritas" : self.number_writes, 
-            "size" : self.quant_elements
+            "Tamánho" : self.quant_elements
         }
         
         info.update(complement_info)

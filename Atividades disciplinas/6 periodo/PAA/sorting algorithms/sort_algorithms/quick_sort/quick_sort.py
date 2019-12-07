@@ -4,45 +4,72 @@ class QuickSort(Sort):
     def __init__(self):
         super().__init__()
 
-    def partition(self, arr,low,high): 
-        i = ( low-1 )         # index of smaller element 
-        pivot = arr[high]     # pivot 
+    def partition(self, arr, l, h): 
+        i = ( l - 1 ) 
+        x = arr[h] 
     
-        for j in range(low , high): 
-            self.number_comparations += 1
-            # If current element is smaller than or 
-            # equal to pivot 
-            if   arr[j] <= pivot: 
-            
+        for j in range(l , h): 
+            if   arr[j] <= x: 
+    
                 # increment index of smaller element 
-                i = i+1 
+                i = i+1
                 arr[i],arr[j] = arr[j],arr[i] 
     
-        arr[i+1],arr[high] = arr[high],arr[i+1] 
-        self.number_writes += 5
-
-        return ( i+1 ) 
-    
-    # The main function that implements QuickSort 
-    # arr[] --> Array to be sorted, 
-    # low  --> Starting index, 
-    # high  --> Ending index 
+        arr[i+1],arr[h] = arr[h],arr[i+1] 
+        return (i+1) 
     
     # Function to do Quick sort 
-    def quickSort(self, arr, low, high): 
-        if low < high: 
-            self.number_comparations += 1
-            # pi is partitioning index, arr[p] is now 
-            # at right place 
-            pi = self.partition(arr,low,high) 
+    # arr[] --> Array to be sorted, 
+    # l  --> Starting index, 
+    # h  --> Ending index 
+    def quickSortIterative(self, arr,l,h): 
     
-            # Separately sort elements before 
-            # partition and after partition 
-            self.quickSort(arr, low, pi-1) 
-            self.quickSort(arr, pi+1, high) 
+        # Create an auxiliary stack 
+        size = h - l + 1
+        stack = [0] * (size) 
+    
+        # initialize top of stack 
+        top = -1
+    
+        # push initial values of l and h to stack 
+        top = top + 1
+        stack[top] = l 
+        top = top + 1
+        stack[top] = h 
+    
+        # Keep popping from stack while is not empty 
+        while top >= 0: 
+    
+            # Pop h and l 
+            h = stack[top] 
+            top = top - 1
+            l = stack[top] 
+            top = top - 1
+    
+            # Set pivot element at its correct position in 
+            # sorted array 
+            p = self.partition( arr, l, h ) 
+    
+            # If there are elements on left side of pivot, 
+            # then push left side to stack 
+            if p-1 > l: 
+                top = top + 1
+                stack[top] = l 
+                top = top + 1
+                stack[top] = p - 1
+    
+            # If there are elements on right side of pivot, 
+            # then push right side to stack 
+            if p+1 < h: 
+                top = top + 1
+                stack[top] = p + 1
+                top = top + 1
+                stack[top] = h
 
     def _sort(self, elements):
         n = len(elements) 
-        self.quickSort(elements, 0, n-1)
+        self.quickSortIterative(elements, 0, n-1)
 
         return elements
+
+

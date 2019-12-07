@@ -1,0 +1,323 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+\usepackage{tabularx}
+
+\usepackage{graphicx,url}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usepackage[brazil]{babel}   
+%\usepackage[latin1]{inputenc}  
+\usepackage[utf8]{inputenc}  
+% UTF-8 encoding is recommended by ShareLaTex
+
+     
+\sloppy
+
+\title{Tree sort: Um estudo de comparação}
+
+\author{Jadson L. Santos\inst{1}}
+
+
+\address{Instituto de Informática -- Universidade Federal do Rio Grande do Sul
+  (UFRGS)\\
+  Caixa Postal 15.064 -- 91.501-970 -- Porto Alegre -- RS -- Brazil
+\nextinstitute
+  Department of Computer Science -- University of Durham\\
+  Durham, U.K.
+\nextinstitute
+  Departamento de Sistemas e Computação\\
+  Universidade Regional de Blumenal (FURB) -- Blumenau, SC -- Brazil
+  \email{\{nedel,flavio\}@inf.ufrgs.br, R.Bordini@durham.ac.uk,
+  jomi@inf.furb.br}
+}
+
+\begin{document} 
+
+\maketitle
+
+\begin{abstract}
+Ordering is the basic operation for the operation of various applications in the computing world. Sorting means organizing a data set in a certain order on the computer, in order to simplify certain operations such as searching. Several algorithms look for
+make this operation less expensive to the computer, whether it is memory usage or processing usage. In this article I will cover the tree sort algorithm and its derivations, comparing their performance against each other and against other popular sorting algorithms.
+\end{abstract}
+     
+\begin{resumo} 
+Ordenação é a operação básica para o funcionamento de várias aplicações no mundo da computação. Ordenar significa organizar
+ um conjunto de dados em uma certa ordem no computador, com o objetivo de simplificar certas operações como, por exemplo,
+a busca. Diante disso vários algoritmos buscam tornar essa operação menos cara para o computador, seja no quesito de uso de memória ou no uso de processamento. Nesse artigo eu irei abordar o algoritmo tree sort e suas derivações, comparando a performance desses entre si e em relação a outros algoritmos de ordenação populares.
+\end{resumo}
+
+
+\section{Introdução}
+\label{sec:introdução}
+Desdo inicio da computação moderna problemas de ordenação tem atraído uma grande atenção da comunidade cientifica, devido a demanda por algoritmos mais oficientes que pudessem trabalhar bem com o crescente tamanho das estruturas de dados e com as particularidades de cada uma dessas estruturas. Vários algoritmos foram criados desde então, cada um com a especifidade e seus pontos fortes e fracos. 
+
+Atualmente os algoritmos de ordenação são usados em varias aplicações. Dentre as quais estão a representação dos dados em um formato mais legível e a otimização para consultas. Nessa primeira aplicação os dados são organizados para facilitar o entendimento dos seres humanos, já que é difícil para nós retirarmos alguma noção de causalidade a partir de dados sem ordenação, um exemplo dessa aplicação esta presente nos dicionários em que as palavras estão organizadas de acordo com a ordem alfabética tornando bem mais simples sua localização. Uma outra vantagem da ordenação, talvez a mais importante, é que dados ordenados facilitam exponencialmente o tempo de busca de um algoritmo de busca binaria \cite{nowak2008generalized} por um determinado elemento em uma lista, dessa forma dado o tamanho das estruturas de dados atualmente um algoritmo de ordenação eficiente torna-se imprescindível.
+
+Devido a essa importância vários algoritmos de ordenação foram propostos na literatura para ternar esse processo mais eficiente em termos de processamento e memória utilizados. Alguns algoritmos focam no baixo uso de memoria \cite{yadav2016sorting} (e.g., Insertion sort, Selection sort, Shell sort), outros buscam diminuir o tempo de processamento (e.g., Timsort, Cubesort, Smoothsort). Nesse artigo eu irei apresentar o algoritmo conhecido como tree sort que se utiliza da estrategia de arvores binarias para fazer a ordenação dos dados.
+
+As principais contribuições desse artigo são: (1) Fazer um estudo comparativo do tree sort e suas variações com os algoritmos de ordenação mais usados atualmente, (ii) determinar qual variação do tree sort é a melhor.
+
+O restante desse artigo esta organizado da seguinte maneira. Na sessão \ref{sec:trab_rel}, alguns trabalhos relacionados a esta pesquisa são discutidos. Na sessão \ref{sec:met_ava} algumas métricas para avaliação e classificação de algoritmos de ordenação são discutidas. Na sessão \ref{sec:sort_algo} são discutidos os algoritmos utilizados para essa pesquisa, tree sort com as suas variações e alguns dos algoritmos mais populares, bubble sort, selection sort, merge sort, quick sort. Na sessão \ref{sec:experimentos} são realizados alguns experimentos com relação a qualidade de cada um desses algoritmos, comparando os resultados de cada um deles. Por fim na sessão \ref{sec:conclusao} conclui o artigo discutindo sobre algumas aplicações do tree sort e apresenta algumas direções futuras para esse trabalho.
+
+\section{Trabalhos relacionados}
+\label{sec:trab_rel}
+% Aqui vão ficar os trabalhos que abordam algoritmos de ordenação (preferencialmente com o tree sort).
+
+Vários trabalhos na literaturam buscam estudar os algoritmos de ordenação, em \cite{cook1980best} os autores listaram os melhores algoritmos de ordenação para lista quase ordenadas. Devido ao aumento no número de núcleos dos processadores atuais muitos trabalhos tem procurado criar algoritmos que tirem vantagem dessa quantidade de núcleos, em \cite{akl2014parallel} o autor faz uma síntese dos algoritmos de ordenação que funcionam em múltiplos núcleos. 
+
+Em relação ao tree sort não foi encontrada nenhum trabalho que trouxesse um estudo comparando sua performance com outros algoritmos, entretanto existem vários trabalhos de estudos comparando a performance de vários algoritmos, em \cite{khancomparative} o autor faz uma estudo comparativo da execução dos algoritmos, bubble sort, merge sort, quick sort, selection sort, entre outros. No melhor, pior e médio caso de cada um desses algoritmos. Já em \cite{astrachan2003bubble} o autor faz um estudo sobre as origens do bubble sort e porque ele se tornou tão popular, comparando essa popularidade e o seu desempenho (complexidade de tempo) com a de outros algoritmos.
+
+
+\section{Métodos de avaliação}
+\label{sec:met_ava}
+% Aqui vão ser discutidas quais são as métricas de avaliação utilizadas para comparar os algoritmos: ordenação interna/externa algoritmo in-place, Estabilidade, uso de memória, tempo de processamento, dificuldade de implementação, abordagem (Comparação ou não-comparação), estrutura utilizada (Array, arvore, etc). Complexidade de uso de memoria, complexidade no pior, médio e melhor caso.
+
+Dependendo de como ocorre a ordenação dos dados os algoritmos podem ser classificados de acordo com: (i) categorias \cite{prajapatiperformance}: Ordenação in-place e out of place, estável e não estável, adaptativa e não adaptativa, baseados em comparação e em distribuição. (ii) Eficiência: Complexidade de uso de memoria, complexidade do uso de processamento, dificuldade de implementação, complexidade no pior, médio e melhor caso.
+
+
+\subsection{Ordenação in-place ou out of place}
+O algoritmo é de ordenação interna quando ele não precisa alocar novos recursos na memória para funcionar, caso contrario eles é tido como de ordenação externa. Essa propriedade tem grande influência no custo de memória do algoritmo, já que quanto mais memória alocada, maior vai ser o consumo de memoria. Por outro lado, algoritmos de ordenação interna sempre vão ter custo de memoria um, o que indica que o algoritmo não utiliza memória auxiliar para funcionar. Um exemplo bem conhecido de algoritmo com ordenação interna é o bubble sort \cite{astrachan2003bubble}, esse algoritmo como pode ser visto no pseudo-código em \ref{algo:bubble_sort} busca comparar cada elemento com os outros da lista, e caso ele seja maior, troca-se as posições dos dois elementos que estão sendo comparado, uma ressalvá para esse tipo de algoritmo é que mesmo ele sendo de ordenação interna o número de escritas na memória ainda é alto, se comparado com outros algoritmos da mesma categoria como o heap sort \ref{fig:comparacao_heap_bubble}. Já um algoritmo de ordenação externa bem conhecido é o merge sort \cite{cole1988parallel}. Ele funciona por meio do principio de dividir para conquistar, em que copias da lista principal com menos elementos são feitas, ordenadas e depois juntas, para formar a lista ordenada.
+
+\begin{algorithm}
+\begin{algorithmic}
+
+\STATE $S$ is an array of elements
+\FOR {$i$ in $1:length(S)-1)$}
+    \FOR {$j$ in $(i+1):length(S)$ }
+        \IF {$S[i]> S[j]$}
+            \STATE swap $S[i]$ and $S[j]$
+        \ENDIF
+    \ENDFOR
+\ENDFOR
+
+\end{algorithmic}
+\caption{Bubble sort algorithm}
+\label{algo:bubble_sort}
+\end{algorithm}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.65\textwidth]{images/comp_bubble_heap_writes.png}
+\caption{Comparação de número de escritas do heap sort em relação ao bubble sort}
+\label{fig:comparacao_heap_bubble}
+\end{figure}
+
+
+
+\subsection{Ordenação estável e não estável}
+Na ordenação estável o posição de elementos que possuem o mesmo valor mantêm a ordem antes da ordenação, então como podemos ver em \ref{fig:stable_sort}, o primeiro elemento 4 (A) veio antes do segundo 4 (B) e isso se manteve após a ordenação. Já na ordenação não estável essa ordem pode não ser mantida.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.65\textwidth]{images/sort_stable_and_not.png}
+\caption{Comportamento de um algoritmo de ordenação estável e não estável}
+\label{fig:stable_sort}
+\end{figure}
+
+A principal vantagem dos algoritmos de ordenação estáveis sobre os não estáveis aparece quando se quer realizar ordenação sobre múltiplos atributos, já que é possível fazer composição de ordenações. Por exemplo, se você deseja classificar os seus contatos de e-mail comercial, você provavelmente vai querer classifica-los pelo nome do remetente em cada empresa. Então você os classifica pelo nome do remetente e depois pelo nome da empresa. Se você não usou um algoritmo de ordenação estável para ordenar pelo nome das empresas não há garantias de que o nome dos remetentes manteve-se ordenado para cada nome de empresa. Dentre alguns dos algoritmos de ordenação estáveis estão o Timsort, Merge Sort \cite{auger2015merge} e Bubble Sort. Já dentre os não instáveis temos, Heapsort, Selection sort, Shell sort.  
+
+\subsection{Ordenação adaptativa e não adaptativa}
+Um algoritmo de ordenação é dito adaptativo se ele leva em conta os elementos da lista que já estão ordenados e não aplica o processo de ordenação sobre esses elementos, por outro lado ele é não adaptativo se aplica o processo de ordenação para todos os elementos independente da ordem. Esse tipo de algoritmo costuma ter uma variância baixa de tempo de excussão para uma lista de tamanho n, independente de como os elementos dessa lista estão organizados. Alguns dos algoritmos de ordenação adaptativa são: Bubble Sort, Insertion Sort e Quick Sort, já dentre os não adaptativos temos: Selection Sort, Merge Sort e Heap Sort.
+
+\subsection{Ordenação baseada em comparação e em distribuição}
+Na ordenação baseada em comparação os elementos são comparados com outros elementos para encontrar a sua posição correta na lista. Já na ordenação baseada em distribuição, todos os elementos são distribuídos no espaço da memória e, em seguida, agrupados para se obter a lista de elementos ordenados. 
+
+\subsection{Eficiência de um algoritmo de ordenação}
+A principal forma de se medir a eficiência de um algoritmo é através do tempo de excussão. Este por sua vez esta diretamente ligado ao número de iterações que o algoritmo faz. Para medir a performance dos algoritmos a notação big-O \cite{black2007big} é usada. Essa notação serve para classificar algoritmos de acordo com o crescimento dos requisitos de tempo de execução ou espaço à medida que o tamanho da entrada aumenta. A notação big-O caracteriza as funções de acordo com suas taxas de crescimento: funções diferentes com a mesma taxa de crescimento podem ser representadas usando a mesma big-O. Existem varias formas de se calcular a complexidade de um algoritmo de ordenação \cite{lueker1980some}, as principais são, o método de árvore de recursão, de indução, e o teorema mestre. 
+
+Outra forma de avaliar um algoritmo é através da dificuldade da sua implementação, em \cite{astrachan2003bubble} o autor utiliza duas métricas para calcular a dificuldade dos algoritmos, uma métrica D que mede o quão difícil é para criar o programa. e outra E que mede o esfosso necessário para converter o algoritmo em programa.
+
+
+\section{Tree sort}
+\label{sec:sort_algo}
+% Aqui vão ser abordados os algoritmos utilizados nos experimentos, descrevendo suas características, sua implementação e suas vantagens e desvantagens em relação aos outros algoritmos utilizados. 
+O algoritmo de ordenação tree sort é um algoritmo de ordenação baseado em comparação e com estrutura de dados de árvore. Ele funciona da seguinte maneira: (i) Todos os elementos são inseridos em uma árvore binária de busca \cite{knuth1971optimum}, (ii) Uma busca em ordem é realizada nessa árvore, com o objetivo de ordenar os elementos. Uma arvore binária é uma estrutura de dados que possui um elemento (node) root que não possui um pai, e onde cada node possui dois ponteiros para seus filhos, um a direita e outro a esquerda. Para propósitos de acelerar buscas e realizar ordenações o elemento a esquerda da arvore sempre é menor ou igual ao seu elemento pai, e o da direita sempre é maior. 
+
+Existem vários tipos de arvores binarias (e.g, completa, cheia, perfeita, degenerada), que podem ser utilizadas no tree sort. Nesse artigo o foco vai ser nas arvores binárias balanceadas, que são arvores onde a diferença de altura das subárvores da direita e esquerda de cada node não diferem em mais de 1. A altura de uma arvore é definido como o número de arestas entre o node principal da árvore (root) e a folha mais longe desse node. Uma folha é um node que não contem filhos.
+
+As árvores balanceada possuem uma grande vantagem quando se trata de árvores binárias, pois quanto mais uma árvore é balanceada menor são as iterações necessárias para a busca e consequentemente a inserção na árvore. Isso ocorre porque em uma árvore não balanceada um node pode conter muitos mais elementos em um lado especifico que no outro, então no pior dos casos um elemento vai precisar ser comparado com todos os outros antes de ser encontrado ou inserido, o que não ocorre em uma árvore balanceada já que quando um elemento passa por um node o espaço de busca diminui pela metade. O algoritmo para a inserção em arvores binárias pode ser visualizado em \ref{algo:insertion_binary_sarch_tree}. Nesse algoritmo o elemento que se quer inserir é comparado com o elemento do node atual (que é inicialmente o root node da árvore), caso ele seja menor o algoritmo deve verificar se o node filho a esquerda do node atual esta vazio, caso isso seja verdade um node com esse elemento é inserido como filho do node atual, casso o node esquerdo não esteja vazio esse node é atribuído como node atual é o processo se repete. Por outro lado se o elemento que se quer inserir for maior que o elemento do node atual o processo anterior se repete mas em relação ao node direito do node atual.
+
+
+\begin{algorithm}[H]
+\begin{algorithmic}
+
+\STATE $E$ is an element to be inserted.
+\STATE $currNode \gets rootNode$
+\WHILE{$currNode$ != null}
+    \IF {$currNode.element\leq E$}
+        \IF {$currNode.rightNode = null$}
+            \STATE $currNode.rightNode \gets node(E)$
+            \STATE $currNode \gets null$
+        \ELSE
+            \STATE $currNode \gets currNode.rightNode$
+        \ENDIF
+    \ELSE
+        \IF {$currNode.leftNode = null$}
+            \STATE $currNode.leftNode \gets node(E)$
+            \STATE $currNode \gets null$
+        \ELSE
+            \STATE $currNode \gets currNode.leftNode$
+        \ENDIF
+    \ENDIF
+\ENDWHILE
+
+\end{algorithmic}
+\caption{Insertion in binary search tree algorithm}
+\label{algo:insertion_binary_sarch_tree}
+\end{algorithm}
+
+A figura \ref{fig:insercao_em_arvores} mostra o processo de inserção para uma árvore binaria não balanceada e balanceada. Para inserir o número oito na árvore balanceada foram necessários duas iterações, por outro lado na árvore não balanceada esse número dobrou. Outro ponto que também deve ser observado é que dependendo da ordem de inserção dos elementos o algoritmo \ref{algo:insertion_binary_sarch_tree} pode gerar árvores mais ou menos balanceadas. 
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.65\textwidth]{images/insercao_em_arvores.png}
+\caption{Inserção em árvores não balanceada e balanceadas}
+\label{fig:insercao_em_arvores}
+\end{figure}
+
+Existem vários algoritmos para balancear árvores binárias (e.g, red-black, avl), nesse artigo vamos abordar as árvores AVL, que possuem um tempo de busca menor que a red-black, mas um tempo de remoção inserção maior. O algoritmo para balancear as árvores AVL 
+
+Após a inserção dos elementos na árvore AVL, para obter os elementos ordenados, uma passagem em ordem deve ser feito na árvore. A figura \ref{fig:in_order_sort} mostra a ordem de passagem do algoritmo sobre os nodes da árvore ordenada. O algoritmo \ref{algo:In_order_algorithm} mostra o processo da passagem em ordem, ele funciona empilhando os nodes a esquerda do node atual (que inicialmente é o root node), adicionando o node atual a uma lista de elementos, e depois desempilha os nodes da pilha atribuindo o elemento da direta do node do topo da pilha como node atual, esse processo continua até que o node atual seja nulo e a pilha esteja vazia.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.5\textwidth]{images/in_order_sort.png}
+\caption{Obtenção da lista ordenada através de uma passagem em ordem}
+\label{fig:in_order_sort}
+\end{figure}
+
+\begin{algorithm}[H]
+\begin{algorithmic}
+\STATE $elements \gets \emptyset$
+\STATE $Stack<Node> s$
+\STATE $currNode \gets rootNode$
+\WHILE {$currNode != NULL and s.empty() == false$}
+    \WHILE{$currNode != null$}
+        \STATE $s.push(currNode)$ 
+        \STATE $currNode \gets currNode->leftNode$ 
+    \ENDWHILE
+    \STATE $currNode \gets s.top()$ 
+    \STATE $s.pop()$ 
+    \STATE $elements.insert(currNode.element)$
+    \STATE $currNode \gets currNode.rightNode$
+\ENDWHILE
+
+\end{algorithmic}
+\caption{In-order algorithm}
+\label{algo:In_order_algorithm}
+\end{algorithm}
+
+\subsection{Análise do Tree sort}
+
+O algoritmo tree sort possui uma ordenação out of place uma vez que ele precisa copiar a informação dos elementos para cada node que vai ser inserido criando uma nova estrutura de dado em arvore. Isso faz com que o tree sort tenha uma complexidade de memoria de $O(n)$. Ele é um algoritmo de ordenação estável pois se um elemento $a$ vier antes de um elemento $b$ e eles possuem o mesmo valor, é garantido que quando o elemento $b$ for inserido ele vai ficar em uma posição a direita de $a$, portanto quando o algoritmo in-order for executado para ordenação o elemento $b$ vai vir depois do $a$, assim como era na configuração original. 
+
+De modo geral o tree sort não se adapta bem a um conjunto de elementos que esta parcialmente ordenado, pois a operação de inserção gera árvores desbalanceadas que precisam de um rebalanceamento constante. De fato uma das maneiras de aumentar a performance desse algoritmo é embaralhar o máximo, os dados, para que ele tenha o mínimo de ordenações possíveis.
+
+Quando a complexidade de tempo, o tree sort gasta a maior parte do seu tempo adicionando os elementos na árvore, de fato a operação de busca in-order sobre a arvore inteira tem uma complexidade $0(n)$, o que não vai ser levado em consideração para calcular a complexidade do algoritmo. Como a complexidade do tree sort esta na inserção dos elementos, para calcula-la devemos primeiro saber qual a complexidade de inserção na árvore binária. Para árvores balanceadas a operação de inserção tem a mesma complexidade de uma operação de busca na árvore, essa por sua vez tem a seguinte função recursiva, $T(n) = T(\frac{n}{2}) + O(1)$, vale ressaltar que essa é a formula para o pior caso da busca binária (também é o pior caso da inserção), que é quando o elemento precisa passar por todos os vértices da árvore até chegar à folha da ultima camada. Usando o método de árvore de recurção mostrado na figura \ref{fig:arvore_complexidade_busca}, temos que $\frac{n}{2^i} = 1$, logo $i = \log_2{n}$, assim a complexidade da busca/inserção na árvore binária é $O(1) * \log_2{n} = O(\log_2{n})$. Com esse resultado temos que a complexidade da inserção de $n$ elementos em uma árvore binária auto-balanceável é $n * \log_2{n} = O(n\log{}n)$. Agora para o caso da árvore não esta balanceada a inserção no pior caso é $O(n)$, ou seja, a complexidade no pior caso da inserção de n elementos é $n \times n = O(n^2)$. A principal maneira de diminuir esse tempo é utilizando árvores binárias de se auto-balanceiam.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.3\textwidth]{images/arvore_complexidade_busca_1.png}
+\caption{Árvore de complexidade para a busca binária}
+\label{fig:arvore_complexidade_busca}
+\end{figure}
+
+\section{Algoritmos de comparação}
+\label{sec:other_algorithms}
+
+Uma dos algoritmos de ordenação que também utilizada a estrutura de árvore é conhecido como cartesian tree \cite{demaine2009cartesian}, ele funciona criando um árvore cartesiana para uma sequencia de elementos e depois utiliza essa árvore junto com um fila de prioridade para criar a lista ordenada. Uma das vantagens desse algoritmo é que ele ao contrario do tree sort funciona bem para elementos parcialmente ordenados. Outro algoritmo que utiliza estruturas de árvore para ordenação é o heap sort, ele cria uma estrutura de árvore conhecida como heap e a partir dessa estrutura vai trocando os elementos em uma lista para ordena-la.
+
+Outros dois algoritmos vão ser utilizados na comparação, o timsort que é o algoritmo de ordenação padrão do python sendo uma evolução do merge sort, e o quick sort, que apesar de ter uma complexidade alta no pior caso $O(n^2)$, é muito utilizado \cite{astrachan2003bubble}.
+
+A tabela \ref{tab:algo_table} mostra as características dos algoritmos escolhidos para esse estudo compratório.
+
+\begin{table}[H]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{llllllllll}
+        \toprule
+        {} &                 Nome &              Método & Melhor caso & Caso médio &             Pior caso & in-place & Memória & Estável & Adaptativo \\
+        \midrule
+        0 &            tree\_sort &            Inserção &    n log(n) &   n log(n) &  n log(n)(balanceada) &      Não &       n &     Sim &        Não \\
+        1 &             tim\_sort &  Inserção e mistura &           n &   n log(n) &              n log(n) &      Não &       n &     Sim &        Sim \\
+        2 &  cartesian\_tree\_sort &    Inserção e troca &           n &   n log(n) &              n log(n) &      Não &       n &     Não &        Sim \\
+        3 &            heap\_sort &             Seleção &    n log(n) &   n log(n) &              n log(n) &      Sim &       1 &     Não &        Não \\
+        4 &           quick\_sort &     Particionamento &    n log(n) &   n log(n) &                 \$n\textasciicircum 2\$ &      Sim &       n &     Não &        Não \\
+        \bottomrule
+    \end{tabular}
+    }
+    \caption{características dos algoritmos}
+    \label{tab:algo_table}
+\end{table}
+
+\section{Experimentos e comparações}
+\label{sec:experimentos}
+% Aqui os resultados dos experimentos envolvendo ordenação vão ser apresentados, gráficos com o tempo de excussão e o uso de memória devem ser apresentados assim como uma comparação com os resultados de cada algoritmo.
+
+Os experimentos buscam comparar a velocidade dos algoritmos, tree sort, timsort, quick sort e cartesian tree sort, assim como o número de comparações e a complexidade de cada algoritmo. Todos os algoritmos foram implementados na linguagem de programação python e executados em um computador com processador Ryzen 3 2200g e 8 gigas de memoria RAM. 
+
+\subsection{Complexidade do código}
+
+Medir a complexidade de implementação de um algoritmo pode ser uma tarefa difícil, já que existem diversas formas de implementação para um mesmo algoritmo. Em \cite{yu2010survey} os autores apresentam varias métricas para avaliação de complexidade de um código. Nesse artigo as seguintes métricas vão ser usadas:
+
+\begin{itemize}
+  \item \textbf{Número de linhas de código ($lloc$)}: Essa métrica representa q quantidade de linhas de código lógicas (excluindo linhas com definições de código, linhas em branco e comentários), ela é importante para identificar e esforço necessário para converter o algoritmo em código. 
+  \item \textbf{Número de operadores ($N_1$)} : Essa métrica representa o quantidade total de operadores (e.g, $>$, $<$, +, -) utilizados no código, servindo para mensurar o número de operações (cálculos) que o computador vai realizar.
+  \item \textbf{Número de operandos ($N_2$)} : Essa métrica representa o número de variáveis ou constantes que estão participando de operações com os operadores, ou seja, os objetos das operações. Ela é importante para mensurar o uso de memoria do algoritmo.
+  \item \textbf{Dificuldade ($D$)} : A dificuldade é calculada de acordo com a formula, $D = \frac{n_1}{2} * (\frac{N_2}{n_2})$, onde $n_1$ representa o número de operadores distintos, $N_2$ é o número total de operandos e $n_2$ o número de operandos distintos.
+  \item \textbf{Esforço ($E$)} : O Esforço é calculado de acordo com a formula, $E = D * V$, onde $D$ representa a dificuldade e $V$ o volume, que é igual a $N * \log2(n_1 + n_2)$.
+  \item \textbf{Complexidade ciclomática ($CC$)} : A complexidade ciclomática corresponde ao número de blocos de decisão (e.g, if, else, for, while) que um código possui.
+\end{itemize}
+
+A tabela \ref{tab:algo_complexity_table} mostra os resultados para os algoritmos selecionados. Podemos ver que o algoritmo tree sort possuí o segundo maior número de linhas de código. Isso se deve ao fato de que existem muitos casos de rotação para o balanceamento da árvore AVL. No quesito dificuldade podemos ver que o tree sort não é tão complexo de se implementar em relação aos outros algoritmos, um motivo para isso é que apesar de existir muitos casos para o processo de balanceamento, eles são basicamente iguais em termos do algoritmo e ser seguindo.
+
+\begin{table}[H]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{llrrrrrr}
+        \toprule
+        {} &                 Nome &  Número de linhas de código &  Número de operadores &  Número de operandos &  Dificuldade &      Esforço &  Complexidade ciclomática \\
+        \midrule
+        0 &            tree\_sort &                          65 &                    29 &                   53 &     5.888889 &  2636.298868 &                        16 \\
+        1 &           quick\_sort &                          33 &                    25 &                   49 &    12.250000 &  4156.268507 &                         6 \\
+        2 &            heap\_sort &                          23 &                    19 &                   35 &     5.104167 &  1365.500358 &                         8 \\
+        3 &             tim\_sort &                          50 &                    40 &                   80 &     8.750000 &  5549.672330 &                        13 \\
+        4 &  cartesian\_tree\_sort &                          83 &                    23 &                   45 &     4.038462 &  1516.855091 &                        24 \\
+        \bottomrule
+    \end{tabular}
+    }
+    \caption{Complexidade de implementação dos algoritmos}
+    \label{tab:algo_complexity_table}
+\end{table}
+
+\subsection{Complexidade de tempo e número de comparações}
+
+Os algoritmos utilizando para esse estudo de comparação foram o tree sort com árvore normal e avl, heap sort, timsort, quick sort e cartesian tree sort. Na figura \ref{fig:tempo_execução_algoritmos_1} estão os algoritmos que possuem complexidade de tempo $O(n\log{}n)$ para o pior caso, respectivamente o tree sort com árvore avl o timsort e o heap  sort. Já na figura \ref{fig:tempo_execução_algoritmos_2} estão os algoritmos que possuem complexidade $0(n^2)$ em algum caso. O objetivo dessa divisão é melhorar a visualização dos algoritmos.
+
+Na figura \ref{fig:tempo_execução_algoritmos_1} os respectivos algoritmos foram testados ordenando listas com 1000, 10000, 100000 e 1000000 de elementos em três situações diferentes com a lista em ordem crescente, decrescente e embaralhada. Os resultados mostram que o tree sort se saiu pior em todos as situações analizadas, tendo uma média de aproximadamente $11.40$, contra $8.17$ e $0.79$ dos algoritmos heap sort e timsort respectivamente. Outro fator observado é que o tree sort para a ordenação com 1000 elementos obteve o menor tempo de excussão com os elementos na ordem crescente   
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.75\textwidth]{images/tempo_execucao_algoritmos_1.png}
+\caption{Tempo de execução dos algoritmos, tree sort avl, timsort e heap sort}
+\label{fig:tempo_execução_algoritmos_1}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.7\textwidth]{images/tempo_execucao_algoritmos_2.png}
+\caption{Tempo de execução dos algoritmos, tree sort, quick sort e castesian tree sort}
+\label{fig:tempo_execução_algoritmos_2}
+\end{figure}
+
+
+\section{Conclusão}
+\label{sec:conclusao}
+% Aqui deve ser feito um resumo sobre o artigo bem como uma breve conclusão sobre os resultados desse trabalho e direções para trabalhos futuros.
+
+\bibliographystyle{sbc}
+\bibliography{sbc-template}
+
+\end{document}

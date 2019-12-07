@@ -12,6 +12,8 @@ from sort_algorithms.insertion_sort.insertion_sort import InsertionSort
 from sort_algorithms.quick_sort.quick_sort import QuickSort
 from sort_algorithms.merge_sort.merge_sort import MergeSort
 from sort_algorithms.selection_sort.selection_sort import SelectionSort
+from sort_algorithms.cartesian_tree_sort.cartesian_tree_sort import CartesianTree
+from sort_algorithms.tim_sort.tim_sort import TimSort
 
 tree_sort_normal = TreeSort(NormalTree, mode = "iterative")
 tree_sort_avl = TreeSort(AVLTree)
@@ -21,16 +23,20 @@ insertion_sort = InsertionSort()
 quick_sort = QuickSort()
 merge_sort = MergeSort()
 selection_sort = SelectionSort()
+cartesian_tree = CartesianTree()
+tim_sort = TimSort()
 
 dict_sort_algorithms = {
-    "tree sort normal" : tree_sort_normal,
+    "tree sort" : tree_sort_normal,
     "tree sort avl" : tree_sort_avl, 
     "bubble sort" : bubble_sort,
     "heap sort" : heap_sort,
     "insertion sort" : insertion_sort,
     "quick sort" : quick_sort,
     "merge sort" : merge_sort,
-    "selection sort" : selection_sort
+    "selection sort" : selection_sort,
+    "cartesian tree" : cartesian_tree,
+    "tim sort" : tim_sort
 }
 
 def shuffle_array(array, num_shuffles):
@@ -43,7 +49,7 @@ def shuffle_array(array, num_shuffles):
     return array
 
 def test_sort_algorithms_with_synthetic_arrays(selected_algorithms = None, array_sizes = None, 
-                    num_iterations = 1, file_name = "synthetic_arrays_test.json", reset = True):
+                    num_iterations = 1, file_name = "synthetic_arrays_test.csv", reset = True):
 
     if selected_algorithms == None and array_sizes == None and not reset:
         results = Results.load_results(file_name)
@@ -52,13 +58,12 @@ def test_sort_algorithms_with_synthetic_arrays(selected_algorithms = None, array
                                             for selected_algorithm in selected_algorithms}
         results = test_sort_algorithms_with_synthetic_data(dict_algorithms, array_sizes, num_iterations)
         results = Results(results, ["Nome do algoritmo", "Tamanho entrada", "Tipo array", "atributo", "Valor"])
-        results.save(file_name)
 
     return results
 
 def test_sort_algorithms_with_shuffle_arrays(selected_algorithms = None, array_size = None, 
                                             shuffle_percentages = None, num_iterations = 1, 
-                                            file_name = "shuffle_arrays.json", reset = True):
+                                            file_name = "shuffle_arrays.csv", reset = True):
     
     if selected_algorithms == None and array_size == None and not reset:
         results = Results.load_results(file_name)
@@ -75,7 +80,5 @@ def test_sort_algorithms_with_shuffle_arrays(selected_algorithms = None, array_s
 
         results = test_sort_algorithms(dict_algorithms, arrays_dict)
         results = Results(results, ["Nome do algoritmo", "Porcentagem de desordenação", "atributo", "Valor"])
-        results.save(file_name)
     
-
     return results

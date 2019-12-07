@@ -26,9 +26,9 @@ def test_synthetic_arrays(sort_obj, arrays_sizes, num_iterations, *args, **kwarg
     info_executions = {}
 
     for array_size in arrays_sizes:
-        print(array_size)
+        
         array_crescent_order = [cont for cont in range(array_size)]
-        array_decrescent_order = [cont for cont in range(array_size, 0, -1)]
+        array_decrescent_order = [cont for cont in range(array_size - 1, -1, -1)]
 
         info_crescent_order = test_sort_algorithm_time_execution(sort_obj, array_crescent_order,
                                                             num_iterations, *args, **kwargs)
@@ -41,9 +41,9 @@ def test_synthetic_arrays(sort_obj, arrays_sizes, num_iterations, *args, **kwarg
                                                         num_iterations, *args, **kwargs)
         
         info_executions[array_size] = {
-            "info_crescent_order" : info_crescent_order,
-            "info_decrescent_order" : info_decrescent_order,
-            "info_shuffle_order" : info_shuffle_order
+            "Ordem crescente" : info_crescent_order,
+            "Ordem decrescente" : info_decrescent_order,
+            "Desordenado" : info_shuffle_order
         }
 
     return info_executions

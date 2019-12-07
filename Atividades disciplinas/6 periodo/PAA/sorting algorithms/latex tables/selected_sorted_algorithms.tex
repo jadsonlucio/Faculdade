@@ -1,0 +1,11 @@
+\begin{tabular}{llllllllll}
+\toprule
+{} &                 Nome &              Método & Melhor caso & Caso médio &             Pior caso & in-place & Memória & Estável & Adaptativo \\
+\midrule
+0 &            tree\_sort &            Inserção &    n log(n) &   n log(n) &  n log(n)(balanceada) &      Não &       n &     Sim &        Não \\
+1 &             tim\_sort &  Inserção e mistura &           n &   n log(n) &              n log(n) &      Não &       n &     Sim &        Sim \\
+2 &  cartesian\_tree\_sort &    Inserção e troca &           n &   n log(n) &              n log(n) &      Não &       n &     Não &        Sim \\
+3 &            heap\_sort &             Seleção &    n log(n) &   n log(n) &              n log(n) &      Sim &       1 &     Não &        Não \\
+4 &           quick\_sort &     Particionamento &    n log(n) &   n log(n) &                 \$n\textasciicircum 2\$ &      Sim &       n &     Não &        Não \\
+\bottomrule
+\end{tabular}

@@ -69,7 +69,7 @@ class PygameClassifierPlot:
         x_half_screen_size = self.width / 2
         y_half_screen_size = self.height / 2
 
-        x, y = cartesian_point     
+        x, y = cartesian_point[0], cartesian_point[1]    
         x_grid_size = abs(self.x_range[1] - self.x_range[0])
         y_grid_size = abs(self.y_range[1] - self.y_range[0])
 
